@@ -49,7 +49,9 @@ async function FetchData() {
 }
 
 export default function App() {
-  const { data: res } = useQuery(['coin'], FetchData)
+  const { data: res } = useQuery(['coin'], FetchData, {
+    refetchInterval: 20000,
+  })
   const labels = res?.labels
   const changes = res?.changes
   return <Bar options={options} data={adapt(labels, changes)} />
