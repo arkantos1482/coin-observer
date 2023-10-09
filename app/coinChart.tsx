@@ -61,7 +61,7 @@ async function FetchData() {
   const url = process.env.NEXT_PUBLIC_BASE_URL + '/api'
   // const url = 'http://localhost:3000' + '/api'
   console.log(process.env)
-  const response = await axios.get(url)
+  const response = await axios.post(url)
   const coinData = response.data
   // Log the histogram data
   return coinData

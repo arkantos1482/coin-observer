@@ -31,14 +31,7 @@ async function FetchData() {
   return { labels, changes }
 }
 
-export async function GET(request: Request) {
+export async function POST() {
   const res = await FetchData()
-  return new Response(JSON.stringify(res), {
-    headers: {
-      'content-type': 'application/json',
-      'Cache-Control': 'max-age=1',
-      'CDN-Cache-Control': 'max-age=1',
-      'Vercel-CDN-Cache-Control': 'max-age=1',
-    },
-  })
+  return Response.json(res)
 }
