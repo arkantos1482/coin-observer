@@ -36,7 +36,9 @@ export async function GET(request: Request) {
   return new Response(JSON.stringify(res), {
     headers: {
       'content-type': 'application/json',
-      'cache-control': 'no-cache',
+      'Cache-Control': 'max-age=1',
+      'CDN-Cache-Control': 'max-age=1',
+      'Vercel-CDN-Cache-Control': 'max-age=1',
     },
   })
 }
