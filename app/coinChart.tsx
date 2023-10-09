@@ -70,6 +70,7 @@ async function FetchData() {
 export default function App() {
   const { data: res } = useQuery(['coin'], FetchData, {
     refetchInterval: 20000,
+    cacheTime: 0,
   })
   const labels = res?.labels
   const changes = res?.changes
