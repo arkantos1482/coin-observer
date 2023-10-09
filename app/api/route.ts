@@ -33,5 +33,10 @@ async function FetchData() {
 
 export async function GET(request: Request) {
   const res = await FetchData()
-  return NextResponse.json(res)
+  return new Response(JSON.stringify(res), {
+    headers: {
+      'content-type': 'application/json',
+      'cache-control': 'no-cache',
+    },
+  })
 }
