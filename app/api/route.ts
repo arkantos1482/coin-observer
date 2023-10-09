@@ -1,6 +1,13 @@
 import axios from 'axios'
 import { NextResponse } from 'next/server'
 
+const axiosInstance = axios.create({
+  headers: {
+    'Cache-Control': 'no-cache',
+    Pragma: 'no-cache',
+    Expires: '0',
+  },
+})
 const apiUrl =
   'https://coin360.com/site-api/coins?currency=USD&period=1h&ranking=top100'
 
@@ -21,7 +28,7 @@ interface Coin360 {
 }
 
 async function FetchData() {
-  const response = await axios.get(apiUrl)
+  const response = await axiosInstance.get(apiUrl)
   const coinData = response.data.data
 
   const sorted = coinData.sort((a: Coin360, b: Coin360) => a.ch - b.ch)
