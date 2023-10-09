@@ -15,7 +15,23 @@ import { Bar } from 'react-chartjs-2'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export const options = {
-  responsive: true,
+  maintainAspectRatio: true, // Disable aspect ratio
+  responsive: true, // Disable responsiveness
+  scales: {
+    x: {
+      beginAtZero: false, // You can customize this as needed
+      grid: {
+        display: false,
+      },
+      ticks: {
+        maxRotation: 90, // Rotate x-axis labels to 0 degrees
+        minRotation: 90,
+      },
+    },
+    y: {
+      // Add y-axis configuration if needed
+    },
+  },
   plugins: {
     legend: {
       position: 'top' as const,
@@ -42,7 +58,10 @@ function adapt(labels?: any[], data?: any[]) {
 }
 
 async function FetchData() {
-  const response = await axios.get('http://localhost:3000/api')
+  const url = process.env.NEXT_PUBLIC_BASE_URL + '/api'
+  // const url = 'http://localhost:3000' + '/api'
+  console.log(process.env)
+  const response = await axios.get(url)
   const coinData = response.data
   // Log the histogram data
   return coinData

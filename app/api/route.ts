@@ -1,9 +1,10 @@
 import axios from 'axios'
+import { NextResponse } from 'next/server'
 
 const apiUrl =
   'https://coin360.com/site-api/coins?currency=USD&period=1h&ranking=top100'
 
-export interface Coin360 {
+interface Coin360 {
   c: string
   ch: number
   em: number
@@ -19,7 +20,7 @@ export interface Coin360 {
   v: number
 }
 
-export async function FetchData() {
+async function FetchData() {
   const response = await axios.get(apiUrl)
   const coinData = response.data.data
 
@@ -31,9 +32,7 @@ export async function FetchData() {
   return { labels, changes }
 }
 
-export async function GET(request: Request) {
-  const { labels, changes } = await FetchData()
-  return new Response(JSON.stringify({ labels, changes }), {
-    headers: { 'content-type': 'application/json' },
-  })
+export async function GET() {
+  const res = await FetchData()
+  return NextResponse.json(res)
 }

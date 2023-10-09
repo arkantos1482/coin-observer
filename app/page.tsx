@@ -8,7 +8,9 @@ export default function Home() {
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <CoinChart />
+        <div style={{ overflowX: 'auto' }}>
+          <CoinChart />
+        </div>
       </QueryClientProvider>
     </div>
   )
